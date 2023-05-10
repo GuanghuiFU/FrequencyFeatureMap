@@ -53,7 +53,7 @@ import numpy as np
 import nibabel as nib
 import torch
 import torchvision.transforms as transforms
-from lib.medzoo.Unet3D_3 import UNet3D_3
+from lib.medzoo.UNet3D import UNet3D
 from torchvision.models import vgg16
 from PIL import Image
 import feature_visualization_frequency.feature_map_visualization_open as fv
@@ -101,7 +101,7 @@ def main_3d():
     mri_tensor = mri_tensor.view(1, 1, *mri_tensor.size())
 
     # Load the model and move to GPU
-    model = UNet3D_3(in_channels=1, n_classes=2, base_n_filter=8)
+    model = UNet3D(in_channels=1, n_classes=2, base_n_filter=8)
     model.restore_checkpoint(pth_path)
     model = model.cuda()
 
