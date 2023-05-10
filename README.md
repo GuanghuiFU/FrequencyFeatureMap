@@ -2,6 +2,11 @@
 
 This code is designed to visualize and save the feature maps of 3D and 2D models such as UNet and VGG. The feature maps can be viewed in the image domain and frequency domain, and saved as `.npy` files. We provide examples of feature map visualization for 3D segmentation network UNet and 2D classification network VGG, and plot feature maps save as `.png`.
 
+## Getting started
+```{.sourceCode .bash}
+pip install frequency-feature-map-visualization
+```
+
 ## Dependencies
 
 - numpy
