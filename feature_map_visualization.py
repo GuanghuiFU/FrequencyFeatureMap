@@ -53,7 +53,7 @@ def visualize_feature_maps_3d(model, input_tensor, device):
     input_tensor = input_tensor.to(device)
 
     def forward_hook(module, input, output):
-        layer_name = str(module.__class__).split('.')[-1].split(''')[0]
+        layer_name = str(module.__class__).split('.')[-1].split("'")[0]
         layer_outputs.append((output, layer_name))
 
     handles = []
@@ -62,7 +62,7 @@ def visualize_feature_maps_3d(model, input_tensor, device):
             handle = layer.register_forward_hook(forward_hook)
             handles.append(handle)
 
-    layer_outputs = [(input_tensor, 'Input')]
+    layer_outputs = [(input_tensor, "Input")]
 
     with torch.no_grad():
         _ = model(input_tensor)
@@ -72,33 +72,6 @@ def visualize_feature_maps_3d(model, input_tensor, device):
 
     feature_map_dict = extract_feature_maps(layer_outputs)
     return feature_map_dict
-
-# Visualize feature maps for 2D model
-def visualize_feature_maps_2d(model, input_tensor, device):
-    print('Visualizing feature maps')
-    input_tensor = input_tensor.to(device)
-
-    def forward_hook(module, input, output):
-        layer_name = str(module.__class__).split('.')[-1].split(''')[0]
-        layer_outputs.append((output, layer_name))
-
-    handles = []
-    for layer in model.modules():
-        if isinstance(layer, (nn.Conv2d, nn.MaxPool2d)):
-            handle = layer.register_forward_hook(forward_hook)
-            handles.append(handle)
-
-    layer_outputs = [(input_tensor, 'Input')]
-
-    with torch.no_grad():
-        _ = model(input_tensor)
-
-    for handle in handles:
-        handle.remove()
-
-    feature_map_dict = extract_feature_maps(layer_outputs)
-    return feature_map_dict
-# Visualize feature maps for 2D model
 def visualize_feature_maps_2d(model, input_tensor, device):
     print('Visualizing feature maps')
     input_tensor = input_tensor.to(device)
@@ -109,7 +82,7 @@ def visualize_feature_maps_2d(model, input_tensor, device):
 
     handles = []
     for layer in model.modules():
-        if isinstance(layer, (nn.Conv2d, nn.MaxPool2d)):
+        if isinstance(layer, (nn.Conv2d, nn.MaxPool2d, Conv2d)):
             handle = layer.register_forward_hook(forward_hook)
             handles.append(handle)
 
