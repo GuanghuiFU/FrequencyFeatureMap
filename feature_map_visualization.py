@@ -82,7 +82,7 @@ def visualize_feature_maps_2d(model, input_tensor, device):
 
     handles = []
     for layer in model.modules():
-        if isinstance(layer, (nn.Conv2d, nn.MaxPool2d, Conv2d)):
+        if isinstance(layer, (nn.Conv2d, nn.MaxPool2d)):
             handle = layer.register_forward_hook(forward_hook)
             handles.append(handle)
 
