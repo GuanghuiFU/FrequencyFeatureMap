@@ -61,7 +61,7 @@ import torchvision.transforms as transforms
 from lib.medzoo.UNet3D import UNet3D
 from torchvision.models import vgg16
 from PIL import Image
-import feature_visualization_frequency as fv
+import frequency_feature_map_visualization as fv
 
 
 # Function to convert image path to a preprocessed tensor
